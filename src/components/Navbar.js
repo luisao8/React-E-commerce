@@ -21,7 +21,7 @@ function NavbarComponent() {
             return response.json();
         }).then((response) => {
             if(response.url) {
-                window.location.assign(response.url); // Forwarding user to Stripe
+                window.location.assign(response.url); 
             }
         });
     }

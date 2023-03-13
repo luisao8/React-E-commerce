@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarComponent from './components/Navbar';
@@ -7,20 +8,20 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import Cancel from './pages/Cancel';
 import Store from './pages/Store';
 import Success from './pages/Success';
+import LoginPage from './pages/LoginPage';
 import CartProvider from './CartContext';
-// localhost:3000 -> Home
-// localhost:3000/success -> Success
+
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <CartProvider>
       <Container>
         <NavbarComponent></NavbarComponent>
         <BrowserRouter>
           <Routes>
-            <Route index element={<Store />} />
-            <Route path="success" element={<Success />} />
-            <Route path="cancel" element={<Cancel />} />
+            <Route path="/" element={isLoggedIn ? <Store /> : <LoginPage onLogin={() => setIsLoggedIn(true)} />} />
+            <Route path="/login" element={<LoginPage onLogin={() => setIsLoggedIn(true)} />} />
           </Routes>
         </BrowserRouter>
       </Container>
